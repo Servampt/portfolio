@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Nguyễn Hoàng Gia Bảo</title>
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --sidebar-bg: #161b22;
+            --card-bg: #1c2128;
+            --border-color: #30363d;
+            --text-main: #c9d1d9;
+            --text-muted: #8b949e;
+            --accent-pink: #ec4899;
+            --accent-blue: #3b82f6;
+            --gradient-text: linear-gradient(90deg, var(--accent-pink), var(--accent-blue));
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* --- SIDEBAR --- */
+        .sidebar {
+            width: 280px;
+            background-color: var(--sidebar-bg);
+            border-right: 1px solid var(--border-color);
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .profile-pic {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8b5cf6, #ec4899);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            font-weight: 800;
+            color: white;
+            box-shadow: 0 0 20px rgba(236, 72, 153, 0.3);
+        }
+
+        .user-info {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .user-info h2 { font-size: 1.3rem; color: white; margin-bottom: 5px; font-weight: 700; }
+        .user-info p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
+
+        .nav-menu { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+        .nav-menu a {
+            display: flex; align-items: center; gap: 12px; padding: 14px 20px;
+            color: var(--text-muted); text-decoration: none; border-radius: 10px;
+            transition: all 0.3s ease; font-size: 1.05rem;
+        }
+        .nav-menu a:hover { background-color: rgba(255, 255, 255, 0.05); }
+        .nav-menu a.active { border: 1px solid white; color: var(--accent-pink); background-color: rgba(255, 255, 255, 0.05); }
+
+        /* --- MAIN CONTENT --- */
+        .main-content { flex: 1; padding: 40px 60px; overflow-y: auto; scroll-behavior: smooth; }
+
+        .page-section { display: none; animation: fadeIn 0.4s ease-in-out; }
+        .page-section.active-section { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-header { margin-bottom: 40px; }
+        .section-header h1 {
+            font-size: 2.5rem; background: var(--gradient-text);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 10px; text-transform: uppercase;
+        }
+        .section-header p { font-size: 1.1rem; color: var(--text-muted); max-width: 800px; line-height: 1.6; }
+
+        /* --- TRANG CHỦ (HOME/ABOUT) --- */
+        .about-container { display: flex; flex-direction: column; gap: 40px; }
+        .about-text { font-size: 1.05rem; line-height: 1.8; color: #cbd5e1; }
+        
+        .goals-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .goal-card {
+            background-color: var(--card-bg); border: 1px solid var(--border-color);
+            padding: 25px; border-radius: 16px;
+        }
+        .goal-card h3 { color: var(--accent-blue); margin-bottom: 10px; font-size: 1.2rem; }
+        .goal-card p { color: var(--text-muted); line-height: 1.6; }
+
+        .skills-section h2 { color: white; margin-bottom: 25px; font-size: 1.6rem; }
+        .skill-item { margin-bottom: 20px; }
+        .skill-info { display: flex; justify-content: space-between; margin-bottom: 8px; font-weight: 500; }
+        .skill-bar-bg { width: 100%; height: 10px; background-color: var(--border-color); border-radius: 5px; overflow: hidden; }
+        .skill-bar-fill { height: 100%; background: var(--gradient-text); border-radius: 5px; transition: width 1s ease-in-out; }
+
+        /* --- TRANG DỰ ÁN (PROJECTS) --- */
+        .tabs { display: flex; gap: 15px; margin-bottom: 30px; }
+        .tab-btn {
+            background-color: var(--card-bg); border: 1px solid var(--border-color);
+            color: var(--text-main); padding: 8px 20px; border-radius: 20px;
+            cursor: pointer; transition: all 0.3s;
+        }
+        .tab-btn.active-filter { background-color: var(--accent-pink); border-color: var(--accent-pink); color: white; }
+
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; }
+        .project-card {
+            background-color: var(--card-bg); border: 1px solid var(--border-color);
+            border-radius: 16px; padding: 25px; transition: transform 0.3s, box-shadow 0.3s;
+            display: flex; flex-direction: column; position: relative; overflow: hidden;
+        }
+        .project-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.5); border-color: rgba(59, 130, 246, 0.5); }
+        .card-number { position: absolute; top: 15px; right: 20px; font-size: 3rem; font-weight: 800; color: rgba(255,255,255,0.05); }
+        .card-title { font-size: 1.25rem; color: white; margin: 10px 0; }
+        .card-desc { color: var(--text-muted); font-size: 0.95rem; line-height: 1.5; margin-bottom: 20px; flex-grow: 1; }
+        .card-meta { display: flex; align-items: center; justify-content: space-between; margin-top: auto; border-top: 1px solid var(--border-color); padding-top: 15px; }
+        
+        .btn-open-modal { color: var(--accent-blue); background: none; border: none; font-weight: 500; font-size: 0.95rem; cursor: pointer; transition: color 0.2s; }
+        .btn-open-modal:hover { text-decoration: underline; color: var(--accent-pink); }
+
+        /* --- MODAL (POPUP BÀI TẬP) --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 1000; opacity: 0; visibility: hidden; transition: all 0.3s ease-in-out;
+        }
+        .modal-overlay.modal-active { opacity: 1; visibility: visible; }
+        .modal-box {
+            background-color: var(--card-bg); border: 1px solid var(--border-color);
+            width: 90%; max-width: 800px; max-height: 85vh; border-radius: 16px;
+            overflow: hidden; display: flex; flex-direction: column;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.7); transform: scale(0.9); transition: transform 0.3s ease-in-out;
+        }
+        .modal-overlay.modal-active .modal-box { transform: scale(1); }
+        .modal-header { padding: 20px 25px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; background-color: var(--sidebar-bg); }
+        .modal-header h2 { font-size: 1.4rem; color: white; }
+        .modal-close { background: none; border: none; color: var(--text-muted); font-size: 1.8rem; cursor: pointer; }
+        .modal-close:hover { color: white; }
+        .modal-body { padding: 30px 25px; overflow-y: auto; line-height: 1.7; font-size: 1rem; color: var(--text-main); }
+        .modal-body h4 { color: white; margin: 20px 0 10px 0; font-size: 1.15rem; border-left: 4px solid var(--accent-pink); padding-left: 10px;}
+        .modal-table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        .modal-table th, .modal-table td { border: 1px solid var(--border-color); padding: 12px; text-align: left; }
+        .modal-table th { background-color: var(--sidebar-bg); color: white; }
+
+        /* --- TIMELINE & SUMMARY --- */
+        .timeline { position: relative; max-width: 800px; margin: 0 auto; }
+        .timeline::after { content: ''; position: absolute; width: 2px; background-color: var(--border-color); top: 0; bottom: 0; left: 20px; }
+        .timeline-item { padding: 20px 0 20px 60px; position: relative; }
+        .timeline-item::after { content: ''; position: absolute; width: 16px; height: 16px; left: 13px; background-color: var(--accent-pink); border: 4px solid var(--bg-color); top: 25px; border-radius: 50%; z-index: 1; }
+        .timeline-date { color: var(--accent-blue); font-weight: bold; margin-bottom: 5px; }
+        .timeline-content { background: var(--card-bg); padding: 20px; border-radius: 10px; border: 1px solid var(--border-color); }
+        .summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 20px; }
+        .summary-box { background: var(--card-bg); padding: 25px; border-radius: 12px; border: 1px solid var(--border-color); }
+        .summary-box h3 { color: var(--accent-pink); margin-bottom: 15px; font-size: 1.2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
+        .summary-box ul { list-style-position: inside; color: var(--text-muted); line-height: 1.8; }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-color); }
+        ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #4b5563; }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="profile-pic">GB</div>
+        <div class="user-info">
+            <h2>Nguyễn Hoàng Gia Bảo</h2>
+            <p>MSSV: 25020035</p>
+            <p>Lớp: CN1 - UET</p>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="#" class="nav-btn active" data-target="page-home">🏠 Trang chủ</a></li>
+            <li><a href="#" class="nav-btn" data-target="page-projects">📚 Bài tập thực hành</a></li>
+            <li><a href="#" class="nav-btn" data-target="page-journey">📈 Hành trình học tập</a></li>
+            <li><a href="#" class="nav-btn" data-target="page-summary">🌟 Tổng kết</a></li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+
+        <section id="page-home" class="page-section active-section">
+            <div class="section-header">
+                <h1>GIỚI THIỆU BẢN THÂN</h1>
+                <p>Welcome to my Digital Portfolio! Nơi lưu giữ hành trình số hóa tư duy và kỹ năng.</p>
+            </div>
+
+            <div class="about-container">
+                <div class="about-text">
+                    <p>Xin chào, mình là <b>Nguyễn Hoàng Gia Bảo</b>, sinh viên ngành Công nghệ Thông tin tại Trường Đại học Công nghệ (UET) – Đại học Quốc gia Hà Nội. Việc học lập trình (với Java, Python) không chỉ là định hướng nghề nghiệp mà còn là cách mình rèn luyện tư duy logic mỗi ngày.</p>
+                    <br>
+                    <p>Bên cạnh việc giải quyết các thuật toán trên màn hình máy tính, mình tìm thấy niềm vui trong việc phân tích các cơ chế chuyển động (ví dụ như tìm hiểu vật liệu lõi carbon hay công nghệ ngọn cơ bida), hoặc chìm đắm vào thế giới cốt truyện của các series Anime/Manga yêu thích. Dù là trong môn Giải tích, một trận đấu thể thao, hay một hệ thống công nghệ, mình luôn đề cao tính chính xác và tư duy hệ thống.</p>
+                </div>
+
+                <div class="goals-grid">
+                    <div class="goal-card">
+                        <h3>Mục tiêu Portfolio</h3>
+                        <p>Portfolio này không chỉ để nộp bài tập môn học. Nó được xây dựng nhằm ghi lại cột mốc đầu tiên trong hành trình chuyển đổi tư duy của mình: từ một người sử dụng công nghệ thụ động sang việc hiểu, khai thác và ứng dụng các công cụ trí tuệ nhân tạo (AI) một cách minh bạch, có trách nhiệm.</p>
+                    </div>
+                    <div class="goal-card">
+                        <h3>Định hướng phát triển</h3>
+                        <p>Mục tiêu cốt lõi của mình là trở thành một Kỹ sư phần mềm vững nền tảng để xây dựng những hệ thống quản lý thực tiễn (như số hóa các quy trình dự án kinh doanh/bất động sản). Song song với code, mình đang nỗ lực chinh phục mục tiêu IELTS quốc tế để mở rộng khả năng tiếp cận tri thức toàn cầu.</p>
+                    </div>
+                </div>
+
+                <div class="skills-section">
+                    <h2>Kỹ năng số đạt được</h2>
+                    
+                    <div class="skill-item">
+                        <div class="skill-info"><span>Tổ chức & Quản lý dữ liệu số</span> <span>95%</span></div>
+                        <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 95%;"></div></div>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <div class="skill-info"><span>Kỹ thuật Prompt Engineering (AI)</span> <span>90%</span></div>
+                        <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 90%;"></div></div>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <div class="skill-info"><span>Khai thác thông tin học thuật</span> <span>85%</span></div>
+                        <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 85%;"></div></div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-info"><span>Hợp tác & Quản lý dự án tuyến</span> <span>80%</span></div>
+                        <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 80%;"></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-projects" class="page-section">
+            <div class="section-header">
+                <h1>PROJECTS</h1>
+                <p>Tổng hợp 6 bài tập cốt lõi minh chứng cho quá trình áp dụng kỹ năng số trong môn Nhập môn Công nghệ số và Ứng dụng Trí tuệ nhân tạo.</p>
+            </div>
+
+            <div class="tabs">
+                <button class="tab-btn active-filter" data-filter="all">Tất cả</button>
+                <button class="tab-btn" data-filter="data">Quản lý dữ liệu</button>
+                <button class="tab-btn" data-filter="ai">Trí tuệ nhân tạo (AI)</button>
+            </div>
+
+            <div class="projects-grid">
+                <div class="project-card" data-category="data">
+                    <div class="card-number">01</div>
+                    <h3 class="card-title">Quản lý Tệp tin & Thư mục</h3>
+                    <p class="card-desc">Thiết lập hệ thống lưu trữ khoa học, chuẩn hóa quy tắc đặt tên giúp tối ưu hóa thời gian tìm kiếm.</p>
+                    <div class="card-meta">
+                        <span style="font-size: 0.85rem; color: #8b949e;">Hoàn thành 100%</span>
+                        <button class="btn-open-modal" data-id="bt1">Mở bài tập ↗</button>
+                    </div>
+                </div>
+                <div class="project-card" data-category="data">
+                    <div class="card-number">02</div>
+                    <h3 class="card-title">Tìm kiếm & Đánh giá Thông tin</h3>
+                    <p class="card-desc">Sử dụng các toán tử nâng cao để tìm kiếm và lập bảng đánh giá độ tin cậy của các nguồn tài liệu.</p>
+                    <div class="card-meta">
+                        <span style="font-size: 0.85rem; color: #8b949e;">Hoàn thành 100%</span>
+                        <button class="btn-open-modal" data-id="bt2">Mở bài tập ↗</button>
+                    </div>
+                </div>
+                <div class="project-card" data-category="ai">
+                    <div class="card-number">03</div>
+                    <h3 class="card-title">Prompt Engineering</h3>
+                    <p class="card-desc">Áp dụng cấu trúc Prompt nâng cao để tối ưu hóa câu lệnh tương tác với AI làm gia sư học tập.</p>
+                    <div class="card-meta">
+                        <span style="font-size: 0.85rem; color: #8b949e;">Hoàn thành 100%</span>
+                        <button class="btn-open-modal" data-id="bt3">Mở bài tập ↗</button>
+                    </div>
+                </div>
+                <div class="project-card" data-category="data">
+                    <div class="card-number">04</div>
+                    <h3 class="card-title">Hợp tác & Quản lý Dự án</h3>
+                    <p class="card-desc">Ứng dụng Trello và Google Docs để tổ chức công việc nhóm, theo dõi tiến độ theo thời gian thực.</p>
+                    <div class="card-meta">
+                        <span style="font-size: 0.85rem; color: #8b949e;">Hoàn thành 100%</span>
+                        <button class="btn-open-modal" data-id="bt4">Mở bài tập ↗</button>
+                    </div>
+                </div>
+                <div class="project-card" data-category="ai">
+                    <div class="card-number">05</div>
+                    <h3 class="card-title">Ứng dụng AI Sáng tạo</h3>
+                    <p class="card-desc">Sử dụng Generative AI để lên ý tưởng và tạo minh họa thiết kế cho Infographic.</p>
+                    <div class="card-meta">
+                        <span style="font-size: 0.85rem; color: #8b949e;">Hoàn thành 100%</span>
+                        <button class="btn-open-modal" data-id="bt5">Mở bài tập ↗</button>
+                    </div>
+                </div>
+                <div class="project-card" data-category="ai">
+                    <div class="card-number">06</div>
+                    <h3 class="card-title">AI có Trách nhiệm & Đạo đức</h3>
+                    <p class="card-desc">Thiết lập bộ nguyên tắc 3 điểm về việc sử dụng AI minh bạch và tuân thủ liêm chính học thuật.</p>
+                    <div class="card-meta">
+                        <span style="font-size: 0.85rem; color: #8b949e;">Hoàn thành 100%</span>
+                        <button class="btn-open-modal" data-id="bt6">Mở bài tập ↗</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-journey" class="page-section">
+            <div class="section-header">
+                <h1>HÀNH TRÌNH HỌC TẬP</h1>
+                <p>Tiến trình tiếp thu kiến thức và thực hành các kỹ năng số qua từng tuần học.</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item"><div class="timeline-date">Tuần 1 - Tuần 2</div><div class="timeline-content"><h3>Bài 1: Quản lý không gian số</h3><p>Học cách tổ chức tệp tin khoa học, thiết lập quy tắc đặt tên và quản lý thư mục trên Cloud.</p></div></div>
+                <div class="timeline-item"><div class="timeline-date">Tuần 3 - Tuần 4</div><div class="timeline-content"><h3>Bài 2: Khai thác thông tin</h3><p>Sử dụng toán tử tìm kiếm chuyên sâu, tiếp cận và đánh giá nguồn tin qua mô hình CRAAP.</p></div></div>
+                <div class="timeline-item"><div class="timeline-date">Tuần 5 - Tuần 6</div><div class="timeline-content"><h3>Bài 3: Trí tuệ nhân tạo (AI)</h3><p>Kỹ thuật viết câu lệnh (Prompt) có cấu trúc để biến AI thành trợ lý học tập.</p></div></div>
+                <div class="timeline-item"><div class="timeline-date">Tuần 7 - Tuần 10</div><div class="timeline-content"><h3>Bài 4 & 5: Hợp tác số & Nội dung</h3><p>Vận hành dự án nhóm bằng Agile/Trello, đồng tác giả tài liệu trực tuyến.</p></div></div>
+                <div class="timeline-item"><div class="timeline-date">Tuần 11 - Tuần 14</div><div class="timeline-content"><h3>Bài 6: Đạo đức AI & Chuyên ngành</h3><p>Xác lập ranh giới gian lận học thuật và định hướng liêm chính khi lập trình.</p></div></div>
+            </div>
+        </section>
+
+        <section id="page-summary" class="page-section">
+            <div class="section-header">
+                <h1>TỔNG KẾT HÀNH TRÌNH</h1>
+                <p>Nhìn lại quá trình chuyển đổi tư duy từ người dùng thụ động sang người làm chủ công cụ số.</p>
+            </div>
+            <div class="summary-grid">
+                <div class="summary-box">
+                    <h3>Trải nghiệm cá nhân</h3>
+                    <ul><li>Hiểu rõ bản chất hoạt động của dữ liệu và Internet.</li><li>Chuyển đổi từ sự choáng ngợp trước AI sang khả năng kiểm soát.</li><li>Hình thành thói quen số hóa quản trị tài liệu.</li></ul>
+                </div>
+                <div class="summary-box">
+                    <h3>Kiến thức cốt lõi</h3>
+                    <ul><li>Tư duy tổ chức hệ thống (Systematic Thinking).</li><li>Kỹ năng Prompt Engineering chuẩn mực (Role - Context - Task).</li><li>Hiểu lằn ranh đạo đức trong học thuật số.</li></ul>
+                </div>
+                <div class="summary-box">
+                    <h3>Điều tâm đắc</h3>
+                    <ul><li>Nhận thức rõ: "Công nghệ chỉ là công cụ, con người mới là trung tâm".</li><li>Kiểm chứng chéo thông tin là tấm khiên chống lại "ảo giác AI".</li></ul>
+                </div>
+                <div class="summary-box">
+                    <h3>Thách thức</h3>
+                    <ul><li>Thay đổi thói quen đặt tên file lộn xộn từ thời trung học.</li><li>Tốc độ thay đổi của AI quá nhanh, đòi hỏi tự cập nhật liên tục.</li></ul>
+                </div>
+            </div>
+        </section>
+
+        <div style="text-align: center; margin-top: 50px; color: #8b949e; font-size: 0.9rem; border-top: 1px solid var(--border-color); padding-top: 20px;">
+            <i>"Đầu tư vào tri thức luôn mang lại lợi nhuận cao nhất." - Benjamin Franklin</i> <br><br>
+            <b>© 2026 Nguyễn Hoàng Gia Bảo (25020035) - Nhập môn Công nghệ số & AI</b><br>
+            Trường Đại học Công nghệ (UET) - Đại học Quốc gia Hà Nội
+        </div>
+    </main>
+
+    <div class="modal-overlay" id="assignment-modal">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h2 id="modal-title">Tiêu đề</h2>
+                <button class="modal-close" id="close-modal">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-content"></div>
+        </div>
+    </div>
+
+    <script>
+        const assignmentData = {
+            bt1: {
+                title: "Bài tập 1: Quản lý Tệp tin & Thư mục",
+                content: `<h4>Tư duy thiết kế & Quy tắc đặt tên</h4><p>Áp dụng mô hình phân cấp logic từ vĩ mô đến vi mô. Quy tắc chuẩn hóa đặt tên tệp: <code>[YYYYMMDD]_[MãMôn]_[TênTàiLiệu]_[PhiênBản]</code> giúp chống thất lạc tài liệu và tránh ghi đè lỗi khi làm việc nhóm.</p>`
+            },
+            bt2: {
+                title: "Bài tập 2: Tìm kiếm & Đánh giá Thông tin",
+                content: `<h4>Chiến lược tìm kiếm & Phân tích CRAAP</h4><p>Áp dụng cú pháp tìm kiếm chuyên sâu: <code>"Object-Oriented Programming" AND "Java" filetype:pdf site:edu</code>. Đánh giá tính chính xác, thẩm quyền (Authority) và độ tin cậy của tài liệu khoa học so với blog cá nhân.</p>`
+            },
+            bt3: {
+                title: "Bài tập 3: Kỹ thuật Prompt Engineering",
+                content: `<h4>Phương pháp luận đặt câu lệnh hệ thống</h4><p>Áp dụng cấu trúc Role (Giảng viên) - Context (Sinh viên năm nhất) - Task (Ví dụ và đoạn code <code>public class Main</code>) - Constraint (Không mô tả rườm rà). Giúp đầu ra của AI chính xác và sạch sẽ.</p>`
+            },
+            bt4: {
+                title: "Bài tập 4: Hợp tác số & Quản lý Dự án",
+                content: `<h4>Thiết lập không gian làm việc số</h4><p>Sử dụng Trello để áp dụng quy trình làm việc Agile. Các thẻ nhiệm vụ được đính kèm link Google Docs trực tiếp để chỉnh sửa theo thời gian thực (Real-time collaboration).</p>`
+            },
+            bt5: {
+                title: "Bài tập 5: Sử dụng AI Sáng tạo Nội dung",
+                content: `<h4>Quy trình ứng dụng Generative AI</h4><p>Dùng LLM phác thảo dàn ý kiến thức, tạo prompt mô tả hình ảnh cho Midjourney/DALL-E, và dùng Canva để dàn trang thành Infographic chuyên nghiệp.</p>`
+            },
+            bt6: {
+                title: "Bài tập 6: Đạo đức & Trách nhiệm khi dùng AI",
+                content: `<h4>Bộ nguyên tắc 3 điểm</h4><ol><li><b>Minh bạch:</b> Chú thích rõ phần có AI hỗ trợ.</li><li><b>Kiểm chứng:</b> Không tin tưởng mù quáng vào kết quả thuật toán, luôn kiểm chứng bằng giáo trình.</li><li><b>Chủ động:</b> AI là trợ lý, không phải người giải hộ (What vs How).</li></ol>`
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. CHUYỂN TRANG
+            const navBtns = document.querySelectorAll('.nav-btn');
+            const pageSections = document.querySelectorAll('.page-section');
+
+            navBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    navBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+
+                    pageSections.forEach(section => section.classList.remove('active-section'));
+                    document.getElementById(btn.getAttribute('data-target')).classList.add('active-section');
+                });
+            });
+
+            // 2. BỘ LỌC TABS DỰ ÁN
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const projectCards = document.querySelectorAll('.project-card');
+
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    tabBtns.forEach(b => b.classList.remove('active-filter'));
+                    btn.classList.add('active-filter');
+
+                    const targetFilter = btn.getAttribute('data-filter');
+                    projectCards.forEach(card => {
+                        if (targetFilter === 'all' || targetFilter === card.getAttribute('data-category')) {
+                            card.style.display = 'flex';
+                            setTimeout(() => { card.style.opacity = '1'; }, 50);
+                        } else {
+                            card.style.opacity = '0';
+                            setTimeout(() => { card.style.display = 'none'; }, 300);
+                        }
+                    });
+                });
+            });
+
+            // 3. XỬ LÝ MODAL POPUP
+            const modalOverlay = document.getElementById('assignment-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalContent = document.getElementById('modal-content');
+
+            document.querySelectorAll('.btn-open-modal').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const data = assignmentData[btn.getAttribute('data-id')];
+                    if (data) {
+                        modalTitle.innerHTML = data.title;
+                        modalContent.innerHTML = data.content + '<br><div class="image-placeholder">[Vị trí chèn ảnh chụp màn hình minh chứng cho bài tập này]</div>';
+                        modalOverlay.classList.add('modal-active');
+                    }
+                });
+            });
+
+            document.getElementById('close-modal').addEventListener('click', () => modalOverlay.classList.remove('modal-active'));
+            modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) modalOverlay.classList.remove('modal-active'); });
+        });
+    </script>
+</body>
+</html>
