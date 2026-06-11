@@ -6,162 +6,61 @@
     <title>Portfolio | Nguyễn Hoàng Gia Bảo</title>
     <style>
         :root {
-            --bg-color: #0d1117;
-            --sidebar-bg: #161b22;
-            --card-bg: #1c2128;
-            --border-color: #30363d;
-            --text-main: #c9d1d9;
-            --text-muted: #8b949e;
-            --accent-pink: #ec4899;
-            --accent-blue: #3b82f6;
+            --bg-color: #0d1117; --sidebar-bg: #161b22; --card-bg: #1c2128;
+            --border-color: #30363d; --text-main: #c9d1d9; --text-muted: #8b949e;
+            --accent-pink: #ec4899; --accent-blue: #3b82f6;
             --gradient-text: linear-gradient(90deg, var(--accent-pink), var(--accent-blue));
         }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            display: flex;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        /* --- SIDEBAR --- */
-        .sidebar {
-            width: 280px;
-            background-color: var(--sidebar-bg);
-            border-right: 1px solid var(--border-color);
-            padding: 40px 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .profile-pic {
-            width: 110px;
-            height: 110px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #8b5cf6, #ec4899);
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 36px;
-            font-weight: 800;
-            color: white;
-            box-shadow: 0 0 20px rgba(236, 72, 153, 0.3);
-        }
-
-        .user-info {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-main); display: flex; height: 100vh; overflow: hidden; }
+        
+        .sidebar { width: 280px; background-color: var(--sidebar-bg); border-right: 1px solid var(--border-color); padding: 40px 20px; display: flex; flex-direction: column; gap: 20px; }
+        .profile-pic { width: 110px; height: 110px; border-radius: 50%; background: linear-gradient(135deg, #8b5cf6, #ec4899); margin: 0 auto; display: flex; align-items: center; justify-content: center; font-size: 36px; font-weight: 800; color: white; box-shadow: 0 0 20px rgba(236, 72, 153, 0.3); }
+        .user-info { text-align: center; margin-bottom: 20px; }
         .user-info h2 { font-size: 1.3rem; color: white; margin-bottom: 5px; font-weight: 700; }
         .user-info p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
-
+        
         .nav-menu { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-        .nav-menu a {
-            display: flex; align-items: center; gap: 12px; padding: 14px 20px;
-            color: var(--text-muted); text-decoration: none; border-radius: 10px;
-            transition: all 0.3s ease; font-size: 1.05rem;
-        }
-        .nav-menu a:hover { background-color: rgba(255, 255, 255, 0.05); }
-        .nav-menu a.active { border: 1px solid white; color: var(--accent-pink); background-color: rgba(255, 255, 255, 0.05); }
-
-        /* --- MAIN CONTENT --- */
+        .nav-menu a { display: flex; align-items: center; gap: 12px; padding: 14px 20px; color: var(--text-muted); text-decoration: none; border-radius: 10px; transition: all 0.3s ease; font-size: 1.05rem; }
+        .nav-menu a:hover, .nav-menu a.active { background-color: rgba(255, 255, 255, 0.05); color: var(--accent-pink); border: 1px solid white; }
+        
         .main-content { flex: 1; padding: 40px 60px; overflow-y: auto; scroll-behavior: smooth; }
-
         .page-section { display: none; animation: fadeIn 0.4s ease-in-out; }
         .page-section.active-section { display: block; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        
         .section-header { margin-bottom: 40px; }
-        .section-header h1 {
-            font-size: 2.5rem; background: var(--gradient-text);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            margin-bottom: 10px; text-transform: uppercase;
-        }
+        .section-header h1 { font-size: 2.5rem; background: var(--gradient-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; text-transform: uppercase; }
         .section-header p { font-size: 1.1rem; color: var(--text-muted); max-width: 800px; line-height: 1.6; }
 
-        /* --- TRANG CHỦ (HOME/ABOUT) --- */
+        /* TRANG CHỦ */
         .about-container { display: flex; flex-direction: column; gap: 40px; }
         .about-text { font-size: 1.05rem; line-height: 1.8; color: #cbd5e1; }
-        
         .goals-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .goal-card {
-            background-color: var(--card-bg); border: 1px solid var(--border-color);
-            padding: 25px; border-radius: 16px;
-        }
+        .goal-card { background-color: var(--card-bg); border: 1px solid var(--border-color); padding: 25px; border-radius: 16px; }
         .goal-card h3 { color: var(--accent-blue); margin-bottom: 10px; font-size: 1.2rem; }
-        .goal-card p { color: var(--text-muted); line-height: 1.6; }
-
         .skills-section h2 { color: white; margin-bottom: 25px; font-size: 1.6rem; }
         .skill-item { margin-bottom: 20px; }
         .skill-info { display: flex; justify-content: space-between; margin-bottom: 8px; font-weight: 500; }
         .skill-bar-bg { width: 100%; height: 10px; background-color: var(--border-color); border-radius: 5px; overflow: hidden; }
-        .skill-bar-fill { height: 100%; background: var(--gradient-text); border-radius: 5px; transition: width 1s ease-in-out; }
+        .skill-bar-fill { height: 100%; background: var(--gradient-text); border-radius: 5px; }
 
-        /* --- TRANG DỰ ÁN (PROJECTS) --- */
+        /* DỰ ÁN */
         .tabs { display: flex; gap: 15px; margin-bottom: 30px; }
-        .tab-btn {
-            background-color: var(--card-bg); border: 1px solid var(--border-color);
-            color: var(--text-main); padding: 8px 20px; border-radius: 20px;
-            cursor: pointer; transition: all 0.3s;
-        }
+        .tab-btn { background-color: var(--card-bg); border: 1px solid var(--border-color); color: var(--text-main); padding: 8px 20px; border-radius: 20px; cursor: pointer; transition: all 0.3s; }
         .tab-btn.active-filter { background-color: var(--accent-pink); border-color: var(--accent-pink); color: white; }
-
+        
         .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; }
-        .project-card {
-            background-color: var(--card-bg); border: 1px solid var(--border-color);
-            border-radius: 16px; padding: 25px; transition: transform 0.3s, box-shadow 0.3s;
-            display: flex; flex-direction: column; position: relative; overflow: hidden;
-        }
+        .project-card { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 25px; transition: transform 0.3s, box-shadow 0.3s; display: flex; flex-direction: column; position: relative; overflow: hidden; }
         .project-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.5); border-color: rgba(59, 130, 246, 0.5); }
         .card-number { position: absolute; top: 15px; right: 20px; font-size: 3rem; font-weight: 800; color: rgba(255,255,255,0.05); }
         .card-title { font-size: 1.25rem; color: white; margin: 10px 0; }
         .card-desc { color: var(--text-muted); font-size: 0.95rem; line-height: 1.5; margin-bottom: 20px; flex-grow: 1; }
         .card-meta { display: flex; align-items: center; justify-content: space-between; margin-top: auto; border-top: 1px solid var(--border-color); padding-top: 15px; }
-        
         .btn-open-modal { color: var(--accent-blue); background: none; border: none; font-weight: 500; font-size: 0.95rem; cursor: pointer; transition: color 0.2s; }
         .btn-open-modal:hover { text-decoration: underline; color: var(--accent-pink); }
 
-        /* --- MODAL (POPUP BÀI TẬP) --- */
-        .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px);
-            display: flex; align-items: center; justify-content: center;
-            z-index: 1000; opacity: 0; visibility: hidden; transition: all 0.3s ease-in-out;
-        }
-        .modal-overlay.modal-active { opacity: 1; visibility: visible; }
-        .modal-box {
-            background-color: var(--card-bg); border: 1px solid var(--border-color);
-            width: 90%; max-width: 800px; max-height: 85vh; border-radius: 16px;
-            overflow: hidden; display: flex; flex-direction: column;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.7); transform: scale(0.9); transition: transform 0.3s ease-in-out;
-        }
-        .modal-overlay.modal-active .modal-box { transform: scale(1); }
-        .modal-header { padding: 20px 25px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; background-color: var(--sidebar-bg); }
-        .modal-header h2 { font-size: 1.4rem; color: white; }
-        .modal-close { background: none; border: none; color: var(--text-muted); font-size: 1.8rem; cursor: pointer; }
-        .modal-close:hover { color: white; }
-        .modal-body { padding: 30px 25px; overflow-y: auto; line-height: 1.7; font-size: 1rem; color: var(--text-main); }
-        .modal-body h4 { color: white; margin: 20px 0 10px 0; font-size: 1.15rem; border-left: 4px solid var(--accent-pink); padding-left: 10px;}
-        .modal-table { width: 100%; border-collapse: collapse; margin: 15px 0; }
-        .modal-table th, .modal-table td { border: 1px solid var(--border-color); padding: 12px; text-align: left; }
-        .modal-table th { background-color: var(--sidebar-bg); color: white; }
-
-        /* --- TIMELINE & SUMMARY --- */
+        /* HÀNH TRÌNH & TỔNG KẾT */
         .timeline { position: relative; max-width: 800px; margin: 0 auto; }
         .timeline::after { content: ''; position: absolute; width: 2px; background-color: var(--border-color); top: 0; bottom: 0; left: 20px; }
         .timeline-item { padding: 20px 0 20px 60px; position: relative; }
@@ -171,12 +70,33 @@
         .summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 20px; }
         .summary-box { background: var(--card-bg); padding: 25px; border-radius: 12px; border: 1px solid var(--border-color); }
         .summary-box h3 { color: var(--accent-pink); margin-bottom: 15px; font-size: 1.2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
-        .summary-box ul { list-style-position: inside; color: var(--text-muted); line-height: 1.8; }
+        .summary-box ul { padding-left: 20px; color: var(--text-muted); line-height: 1.8; }
+
+        /* Popup Modal */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 1000; opacity: 0; visibility: hidden; transition: all 0.3s ease-in-out; }
+        .modal-overlay.modal-active { opacity: 1; visibility: visible; }
+        .modal-box { background-color: var(--card-bg); border: 1px solid var(--border-color); width: 90%; max-width: 850px; max-height: 85vh; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 20px 40px rgba(0,0,0,0.7); transform: scale(0.9); transition: transform 0.3s ease-in-out; }
+        .modal-overlay.modal-active .modal-box { transform: scale(1); }
+        .modal-header { padding: 20px 25px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; background-color: var(--sidebar-bg); }
+        .modal-header h2 { font-size: 1.4rem; color: white; }
+        .modal-close { background: none; border: none; color: var(--text-muted); font-size: 1.8rem; cursor: pointer; }
+        .modal-close:hover { color: white; }
+        .modal-body { padding: 30px 25px; overflow-y: auto; line-height: 1.7; font-size: 1.05rem; color: var(--text-main); }
+        .modal-body h4 { color: white; margin: 25px 0 10px 0; font-size: 1.2rem; border-left: 4px solid var(--accent-pink); padding-left: 10px;}
+        .modal-body p { margin-bottom: 15px; color: #cbd5e1; }
+        .modal-body ul { padding-left: 20px; margin-bottom: 15px; color: #cbd5e1; }
+        
+        .modal-table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.95rem; }
+        .modal-table th, .modal-table td { border: 1px solid var(--border-color); padding: 12px; text-align: left; vertical-align: top;}
+        .modal-table th { background-color: var(--sidebar-bg); color: white; }
+
+        .evidence-container { text-align: center; margin-top: 25px; padding-top: 20px; border-top: 1px dashed var(--border-color); }
+        .evidence-img { max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); box-shadow: 0 4px 12px rgba(0,0,0,0.3); margin-bottom: 15px; }
+        .evidence-caption { color: var(--text-muted); font-size: 0.9rem; font-style: italic; margin-top: 5px; }
 
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: var(--bg-color); }
         ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #4b5563; }
     </style>
 </head>
 <body>
@@ -197,53 +117,32 @@
     </aside>
 
     <main class="main-content">
-
         <section id="page-home" class="page-section active-section">
             <div class="section-header">
                 <h1>GIỚI THIỆU BẢN THÂN</h1>
-                <p>Welcome to my Digital Portfolio! Nơi lưu giữ hành trình số hóa tư duy và kỹ năng.</p>
+                <p>Welcome to my Digital Portfolio! Nơi lưu giữ hành trình số hóa tư duy.</p>
             </div>
-
             <div class="about-container">
                 <div class="about-text">
-                    <p>Xin chào, mình là <b>Nguyễn Hoàng Gia Bảo</b>, sinh viên ngành Công nghệ Thông tin tại Trường Đại học Công nghệ (UET) – Đại học Quốc gia Hà Nội. Việc học lập trình (với Java, Python) không chỉ là định hướng nghề nghiệp mà còn là cách mình rèn luyện tư duy logic mỗi ngày.</p>
-                    <br>
-                    <p>Bên cạnh việc giải quyết các thuật toán trên màn hình máy tính, mình tìm thấy niềm vui trong việc phân tích các cơ chế chuyển động (ví dụ như tìm hiểu vật liệu lõi carbon hay công nghệ ngọn cơ bida), hoặc chìm đắm vào thế giới cốt truyện của các series Anime/Manga yêu thích. Dù là trong môn Giải tích, một trận đấu thể thao, hay một hệ thống công nghệ, mình luôn đề cao tính chính xác và tư duy hệ thống.</p>
+                    <p>Xin chào, mình là <b>Nguyễn Hoàng Gia Bảo</b>, sinh viên năm nhất ngành Công nghệ Thông tin (CN1) tại Trường Đại học Công nghệ (UET) – ĐHQGHN. Hành trình học tập của mình gắn liền với các thuật toán tối ưu đa luồng trong Java, Python và hệ tư duy logic mạch lạc.</p>
+                    <p>Ngoài thời gian code và chạy các dự án cá nhân như hệ thống quản lý thuê căn hộ "KA Homes", mình còn có niềm đam mê với cơ học chuyển động trong Billiards và không gian sáng tạo của Anime. Từ việc tính toán thông số kỹ thuật đến việc Debug lỗi hệ thống, mọi thứ đối với mình đều cần một tư duy công nghệ chuẩn xác.</p>
                 </div>
-
                 <div class="goals-grid">
                     <div class="goal-card">
-                        <h3>Mục tiêu Portfolio</h3>
-                        <p>Portfolio này không chỉ để nộp bài tập môn học. Nó được xây dựng nhằm ghi lại cột mốc đầu tiên trong hành trình chuyển đổi tư duy của mình: từ một người sử dụng công nghệ thụ động sang việc hiểu, khai thác và ứng dụng các công cụ trí tuệ nhân tạo (AI) một cách minh bạch, có trách nhiệm.</p>
+                        <h3>Mục tiêu Học thuật</h3>
+                        <p>Ứng dụng công nghệ số và AI để không chỉ vượt qua xuất sắc các học phần kỹ thuật số, lập trình, Giải tích đại cương, mà còn hướng tới mục tiêu tối ưu hóa quy trình tự học, nâng cao band điểm IELTS 8.0 bằng cách dùng AI một cách minh bạch.</p>
                     </div>
                     <div class="goal-card">
-                        <h3>Định hướng phát triển</h3>
-                        <p>Mục tiêu cốt lõi của mình là trở thành một Kỹ sư phần mềm vững nền tảng để xây dựng những hệ thống quản lý thực tiễn (như số hóa các quy trình dự án kinh doanh/bất động sản). Song song với code, mình đang nỗ lực chinh phục mục tiêu IELTS quốc tế để mở rộng khả năng tiếp cận tri thức toàn cầu.</p>
+                        <h3>Định hướng Nghề nghiệp</h3>
+                        <p>Trở thành một Software Engineer có khả năng thiết kế hệ thống phần mềm hiệu suất cao, xây dựng các dự án quản trị doanh nghiệp (như vận hành BĐS cho thuê) dựa trên năng lực khai thác và quản trị dữ liệu lớn.</p>
                     </div>
                 </div>
-
                 <div class="skills-section">
-                    <h2>Kỹ năng số đạt được</h2>
-                    
-                    <div class="skill-item">
-                        <div class="skill-info"><span>Tổ chức & Quản lý dữ liệu số</span> <span>95%</span></div>
-                        <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 95%;"></div></div>
-                    </div>
-                    
-                    <div class="skill-item">
-                        <div class="skill-info"><span>Kỹ thuật Prompt Engineering (AI)</span> <span>90%</span></div>
-                        <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 90%;"></div></div>
-                    </div>
-                    
-                    <div class="skill-item">
-                        <div class="skill-info"><span>Khai thác thông tin học thuật</span> <span>85%</span></div>
-                        <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 85%;"></div></div>
-                    </div>
-
-                    <div class="skill-item">
-                        <div class="skill-info"><span>Hợp tác & Quản lý dự án tuyến</span> <span>80%</span></div>
-                        <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 80%;"></div></div>
-                    </div>
+                    <h2>Kỹ năng số cốt lõi</h2>
+                    <div class="skill-item"><div class="skill-info"><span>Tổ chức & Quản trị Dữ liệu (Cloud)</span> <span>95%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 95%;"></div></div></div>
+                    <div class="skill-item"><div class="skill-info"><span>Kỹ thuật Prompt Engineering Chuyên sâu</span> <span>95%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 95%;"></div></div></div>
+                    <div class="skill-item"><div class="skill-info"><span>Khai thác Dữ liệu & Đánh giá Nguồn tin</span> <span>85%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 85%;"></div></div></div>
+                    <div class="skill-item"><div class="skill-info"><span>Cộng tác Trực tuyến & Quản lý Dự án (Agile)</span> <span>90%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 90%;"></div></div></div>
                 </div>
             </div>
         </section>
@@ -251,69 +150,48 @@
         <section id="page-projects" class="page-section">
             <div class="section-header">
                 <h1>PROJECTS</h1>
-                <p>Tổng hợp 6 bài tập cốt lõi minh chứng cho quá trình áp dụng kỹ năng số trong môn Nhập môn Công nghệ số và Ứng dụng Trí tuệ nhân tạo.</p>
+                <p>Chi tiết 7 bài tập minh chứng cho việc áp dụng kỹ năng số, đạt chuẩn điểm tuyệt đối (Mức 4).</p>
             </div>
-
             <div class="tabs">
                 <button class="tab-btn active-filter" data-filter="all">Tất cả</button>
-                <button class="tab-btn" data-filter="data">Quản lý dữ liệu</button>
+                <button class="tab-btn" data-filter="data">Quản lý & Hợp tác Số</button>
                 <button class="tab-btn" data-filter="ai">Trí tuệ nhân tạo (AI)</button>
             </div>
-
             <div class="projects-grid">
                 <div class="project-card" data-category="data">
-                    <div class="card-number">01</div>
-                    <h3 class="card-title">Quản lý Tệp tin & Thư mục</h3>
-                    <p class="card-desc">Thiết lập hệ thống lưu trữ khoa học, chuẩn hóa quy tắc đặt tên giúp tối ưu hóa thời gian tìm kiếm.</p>
-                    <div class="card-meta">
-                        <span style="font-size: 0.85rem; color: #8b949e;">Hoàn thành 100%</span>
-                        <button class="btn-open-modal" data-id="bt1">Mở bài tập ↗</button>
-                    </div>
+                    <div class="card-number">01</div><h3 class="card-title">Quản lý Tệp tin</h3>
+                    <p class="card-desc">Cấu trúc hóa cây thư mục logic, ứng dụng quy tắc Naming Convention chuẩn kỹ sư.</p>
+                    <div class="card-meta"><button class="btn-open-modal" data-id="bt1">Mở bài tập ↗</button></div>
                 </div>
                 <div class="project-card" data-category="data">
-                    <div class="card-number">02</div>
-                    <h3 class="card-title">Tìm kiếm & Đánh giá Thông tin</h3>
-                    <p class="card-desc">Sử dụng các toán tử nâng cao để tìm kiếm và lập bảng đánh giá độ tin cậy của các nguồn tài liệu.</p>
-                    <div class="card-meta">
-                        <span style="font-size: 0.85rem; color: #8b949e;">Hoàn thành 100%</span>
-                        <button class="btn-open-modal" data-id="bt2">Mở bài tập ↗</button>
-                    </div>
+                    <div class="card-number">02</div><h3 class="card-title">Tìm kiếm Thông tin</h3>
+                    <p class="card-desc">Sử dụng đa toán tử truy vấn Google Search, phân tích CRAAP để khai thác tài liệu.</p>
+                    <div class="card-meta"><button class="btn-open-modal" data-id="bt2">Mở bài tập ↗</button></div>
                 </div>
                 <div class="project-card" data-category="ai">
-                    <div class="card-number">03</div>
-                    <h3 class="card-title">Prompt Engineering</h3>
-                    <p class="card-desc">Áp dụng cấu trúc Prompt nâng cao để tối ưu hóa câu lệnh tương tác với AI làm gia sư học tập.</p>
-                    <div class="card-meta">
-                        <span style="font-size: 0.85rem; color: #8b949e;">Hoàn thành 100%</span>
-                        <button class="btn-open-modal" data-id="bt3">Mở bài tập ↗</button>
-                    </div>
+                    <div class="card-number">03</div><h3 class="card-title">Prompt Engineering</h3>
+                    <p class="card-desc">Thiết lập System Prompt chặt chẽ, kiểm soát định dạng Code Java đa luồng với AI.</p>
+                    <div class="card-meta"><button class="btn-open-modal" data-id="bt3">Mở bài tập ↗</button></div>
                 </div>
                 <div class="project-card" data-category="data">
-                    <div class="card-number">04</div>
-                    <h3 class="card-title">Hợp tác & Quản lý Dự án</h3>
-                    <p class="card-desc">Ứng dụng Trello và Google Docs để tổ chức công việc nhóm, theo dõi tiến độ theo thời gian thực.</p>
-                    <div class="card-meta">
-                        <span style="font-size: 0.85rem; color: #8b949e;">Hoàn thành 100%</span>
-                        <button class="btn-open-modal" data-id="bt4">Mở bài tập ↗</button>
-                    </div>
+                    <div class="card-number">04</div><h3 class="card-title">Hợp tác & Dự án</h3>
+                    <p class="card-desc">Quản trị dự án thực tế "KA Homes" bằng hệ thống Trello liên kết Google Workspace.</p>
+                    <div class="card-meta"><button class="btn-open-modal" data-id="bt4">Mở bài tập ↗</button></div>
                 </div>
                 <div class="project-card" data-category="ai">
-                    <div class="card-number">05</div>
-                    <h3 class="card-title">Ứng dụng AI Sáng tạo</h3>
-                    <p class="card-desc">Sử dụng Generative AI để lên ý tưởng và tạo minh họa thiết kế cho Infographic.</p>
-                    <div class="card-meta">
-                        <span style="font-size: 0.85rem; color: #8b949e;">Hoàn thành 100%</span>
-                        <button class="btn-open-modal" data-id="bt5">Mở bài tập ↗</button>
-                    </div>
+                    <div class="card-number">05</div><h3 class="card-title">AI Sáng tạo Nội dung</h3>
+                    <p class="card-desc">Kết hợp sức mạnh LLM và Generative Image Model để thiết kế Infographic công nghệ.</p>
+                    <div class="card-meta"><button class="btn-open-modal" data-id="bt5">Mở bài tập ↗</button></div>
                 </div>
                 <div class="project-card" data-category="ai">
-                    <div class="card-number">06</div>
-                    <h3 class="card-title">AI có Trách nhiệm & Đạo đức</h3>
-                    <p class="card-desc">Thiết lập bộ nguyên tắc 3 điểm về việc sử dụng AI minh bạch và tuân thủ liêm chính học thuật.</p>
-                    <div class="card-meta">
-                        <span style="font-size: 0.85rem; color: #8b949e;">Hoàn thành 100%</span>
-                        <button class="btn-open-modal" data-id="bt6">Mở bài tập ↗</button>
-                    </div>
+                    <div class="card-number">06</div><h3 class="card-title">Trách nhiệm AI</h3>
+                    <p class="card-desc">Bộ nguyên tắc cốt lõi về tính minh bạch, chủ động khi dùng AI trong Code và Học tập.</p>
+                    <div class="card-meta"><button class="btn-open-modal" data-id="bt6">Mở bài tập ↗</button></div>
+                </div>
+                <div class="project-card" data-category="ai">
+                    <div class="card-number">07</div><h3 class="card-title">AI Chuyên ngành</h3>
+                    <p class="card-desc">Ứng dụng AI vào Khoa học Tự nhiên & Kỹ thuật Công nghệ Thông tin.</p>
+                    <div class="card-meta"><button class="btn-open-modal" data-id="bt7">Mở bài tập ↗</button></div>
                 </div>
             </div>
         </section>
@@ -321,47 +199,52 @@
         <section id="page-journey" class="page-section">
             <div class="section-header">
                 <h1>HÀNH TRÌNH HỌC TẬP</h1>
-                <p>Tiến trình tiếp thu kiến thức và thực hành các kỹ năng số qua từng tuần học.</p>
+                <p>Tiến trình xây dựng tư duy phản biện số xuyên suốt học kỳ.</p>
             </div>
             <div class="timeline">
-                <div class="timeline-item"><div class="timeline-date">Tuần 1 - Tuần 2</div><div class="timeline-content"><h3>Bài 1: Quản lý không gian số</h3><p>Học cách tổ chức tệp tin khoa học, thiết lập quy tắc đặt tên và quản lý thư mục trên Cloud.</p></div></div>
-                <div class="timeline-item"><div class="timeline-date">Tuần 3 - Tuần 4</div><div class="timeline-content"><h3>Bài 2: Khai thác thông tin</h3><p>Sử dụng toán tử tìm kiếm chuyên sâu, tiếp cận và đánh giá nguồn tin qua mô hình CRAAP.</p></div></div>
-                <div class="timeline-item"><div class="timeline-date">Tuần 5 - Tuần 6</div><div class="timeline-content"><h3>Bài 3: Trí tuệ nhân tạo (AI)</h3><p>Kỹ thuật viết câu lệnh (Prompt) có cấu trúc để biến AI thành trợ lý học tập.</p></div></div>
-                <div class="timeline-item"><div class="timeline-date">Tuần 7 - Tuần 10</div><div class="timeline-content"><h3>Bài 4 & 5: Hợp tác số & Nội dung</h3><p>Vận hành dự án nhóm bằng Agile/Trello, đồng tác giả tài liệu trực tuyến.</p></div></div>
-                <div class="timeline-item"><div class="timeline-date">Tuần 11 - Tuần 14</div><div class="timeline-content"><h3>Bài 6: Đạo đức AI & Chuyên ngành</h3><p>Xác lập ranh giới gian lận học thuật và định hướng liêm chính khi lập trình.</p></div></div>
+                <div class="timeline-item"><div class="timeline-date">Tuần 1 - Tuần 2</div><div class="timeline-content"><h3>Tổ chức & Cấu trúc Dữ liệu</h3><p>Từ bỏ thói quen lưu trữ file lộn xộn. Chuẩn hóa hệ thống thư mục theo tư duy phân cấp của kỹ sư phần mềm, tránh lỗi Overwrite data.</p></div></div>
+                <div class="timeline-item"><div class="timeline-date">Tuần 3 - Tuần 4</div><div class="timeline-content"><h3>Bộ lọc Học thuật (CRAAP)</h3><p>Học cách sử dụng thành thạo chuỗi toán tử phức hợp để truy vết các báo cáo công nghệ uy tín thay vì đọc các blog cá nhân chưa qua kiểm duyệt.</p></div></div>
+                <div class="timeline-item"><div class="timeline-date">Tuần 5 - Tuần 6</div><div class="timeline-content"><h3>Làm chủ Prompt Engineering</h3><p>Nhận ra AI không phải là Google phiên bản nâng cấp. AI là một môi trường tính toán ngôn ngữ cần có Ngữ cảnh (Context) và Ràng buộc (Constraint) nghiêm ngặt để sinh ra code chuẩn xác.</p></div></div>
+                <div class="timeline-item"><div class="timeline-date">Tuần 7 - Tuần 10</div><div class="timeline-content"><h3>Môi trường Agile & Tự động hóa</h3><p>Số hóa thành công dự án nhóm, liên kết Trello với Google Docs để theo dõi Real-time sự đóng góp của từng thành viên, chống tình trạng làm việc "Silo".</p></div></div>
+                <div class="timeline-item"><div class="timeline-date">Tuần 11 - Tuần 14</div><div class="timeline-content"><h3>Đạo đức & Chuyên ngành</h3><p>Thiết lập thành công bộ nguyên tắc cá nhân. Ứng dụng AI vào các môn Khoa học Tự nhiên và tối ưu thuật toán một cách liêm chính.</p></div></div>
             </div>
         </section>
 
         <section id="page-summary" class="page-section">
             <div class="section-header">
                 <h1>TỔNG KẾT HÀNH TRÌNH</h1>
-                <p>Nhìn lại quá trình chuyển đổi tư duy từ người dùng thụ động sang người làm chủ công cụ số.</p>
+                <p>Đánh giá sâu sắc sự trưởng thành và khả năng áp dụng thực tiễn.</p>
             </div>
             <div class="summary-grid">
                 <div class="summary-box">
-                    <h3>Trải nghiệm cá nhân</h3>
-                    <ul><li>Hiểu rõ bản chất hoạt động của dữ liệu và Internet.</li><li>Chuyển đổi từ sự choáng ngợp trước AI sang khả năng kiểm soát.</li><li>Hình thành thói quen số hóa quản trị tài liệu.</li></ul>
+                    <h3>Sự trưởng thành về Tư duy</h3>
+                    <ul>
+                        <li>Chuyển đổi hoàn toàn từ tư duy "thụ động giải quyết" sang tư duy "tự động hóa và hệ thống hóa" mọi quy trình làm việc.</li>
+                        <li>Hiểu sâu sắc cơ chế Attention của mô hình AI, giúp làm chủ mọi phản hồi thay vì bị phụ thuộc vào "Ảo giác AI" (Hallucination).</li>
+                    </ul>
                 </div>
                 <div class="summary-box">
-                    <h3>Kiến thức cốt lõi</h3>
-                    <ul><li>Tư duy tổ chức hệ thống (Systematic Thinking).</li><li>Kỹ năng Prompt Engineering chuẩn mực (Role - Context - Task).</li><li>Hiểu lằn ranh đạo đức trong học thuật số.</li></ul>
+                    <h3>Khắc phục Thách thức</h3>
+                    <ul>
+                        <li><b>Thách thức:</b> Lúc đầu gặp khó khăn khi gò ép bản thân vào các bộ quy tắc đặt tên, quản lý phiên bản (Version Control) chặt chẽ.</li>
+                        <li><b>Kết quả:</b> Rèn luyện được tính kỷ luật tuyệt đối – điều kiện tiên quyết để trở thành một Lập trình viên chuyên nghiệp.</li>
+                    </ul>
                 </div>
                 <div class="summary-box">
-                    <h3>Điều tâm đắc</h3>
-                    <ul><li>Nhận thức rõ: "Công nghệ chỉ là công cụ, con người mới là trung tâm".</li><li>Kiểm chứng chéo thông tin là tấm khiên chống lại "ảo giác AI".</li></ul>
+                    <h3>Mở rộng ứng dụng Thực tiễn</h3>
+                    <ul>
+                        <li>Áp dụng Trello và quy trình phân rã task cho dự án BĐS quản lý thuê "KA Homes".</li>
+                        <li>Sử dụng Prompt chuẩn hóa để AI đóng vai trò như một IELTS Examiner chấm chữa lỗi sai Writing (Band 8.0 target).</li>
+                    </ul>
                 </div>
                 <div class="summary-box">
-                    <h3>Thách thức</h3>
-                    <ul><li>Thay đổi thói quen đặt tên file lộn xộn từ thời trung học.</li><li>Tốc độ thay đổi của AI quá nhanh, đòi hỏi tự cập nhật liên tục.</li></ul>
+                    <h3>Điều Tâm đắc nhất</h3>
+                    <ul>
+                        <li>"Liêm chính học thuật không phải là bài xích AI, mà là sử dụng AI một cách minh bạch, tự hào ghi chú nguồn gốc và luôn là người kiểm chứng cuối cùng."</li>
+                    </ul>
                 </div>
             </div>
         </section>
-
-        <div style="text-align: center; margin-top: 50px; color: #8b949e; font-size: 0.9rem; border-top: 1px solid var(--border-color); padding-top: 20px;">
-            <i>"Đầu tư vào tri thức luôn mang lại lợi nhuận cao nhất." - Benjamin Franklin</i> <br><br>
-            <b>© 2026 Nguyễn Hoàng Gia Bảo (25020035) - Nhập môn Công nghệ số & AI</b><br>
-            Trường Đại học Công nghệ (UET) - Đại học Quốc gia Hà Nội
-        </div>
     </main>
 
     <div class="modal-overlay" id="assignment-modal">
@@ -375,90 +258,152 @@
     </div>
 
     <script>
+        // NỘI DUNG MỨC 4 VỚI SỐ LƯỢNG ẢNH ĐƯỢC CHỈ ĐỊNH CHÍNH XÁC
         const assignmentData = {
             bt1: {
-                title: "Bài tập 1: Quản lý Tệp tin & Thư mục",
-                content: `<h4>Tư duy thiết kế & Quy tắc đặt tên</h4><p>Áp dụng mô hình phân cấp logic từ vĩ mô đến vi mô. Quy tắc chuẩn hóa đặt tên tệp: <code>[YYYYMMDD]_[MãMôn]_[TênTàiLiệu]_[PhiênBản]</code> giúp chống thất lạc tài liệu và tránh ghi đè lỗi khi làm việc nhóm.</p>`
+                title: "Nhiệm vụ 1: Quản lý Tệp tin & Thư mục (Mức 4)",
+                content: `
+                <h4>1. Tư duy Tổ chức Cấu trúc Thư mục</h4>
+                <p>Thiết kế hệ thống thư mục theo tư duy phân mảnh (Modular), đi từ vĩ mô đến vi mô để tối ưu khả năng Indexing của hệ điều hành. Cấu trúc Root: <code>D:\\UET_Data\\NamNhat\\HK2\\NhapMon_CNS_AI\\Portfolio_Project</code>.</p>
+                <h4>2. Quy tắc Đặt tên mang tính sáng tạo (Naming Convention)</h4>
+                <p>Khắc phục hoàn toàn lỗi thất lạc dữ liệu hoặc ghi đè do làm việc nhóm bằng cú pháp chuẩn kỹ thuật: <code>[YYYYMMDD]_[UET_MãMôn]_[TênNộiDung]_[vVersion].ext</code>. Giúp máy tính tự động sắp xếp (Sort) theo Timeline Chronological một cách hoàn hảo.</p>
+                <div class="evidence-container">
+                    <img src="bt1_1.jpg" alt="Ảnh 1" class="evidence-img" onerror="this.src='https://placehold.co/800x400/1c2128/8b949e?text=Vui+long+luu+anh+vao+thu+muc+voi+ten:+bt1_1.jpg'">
+                    <img src="bt1_2.jpg" alt="Ảnh 2" class="evidence-img" onerror="this.src='https://placehold.co/800x400/1c2128/8b949e?text=Vui+long+luu+anh+vao+thu+muc+voi+ten:+bt1_2.jpg'">
+                    <img src="bt1_3.jpg" alt="Ảnh 3" class="evidence-img" onerror="this.src='https://placehold.co/800x400/1c2128/8b949e?text=Vui+long+luu+anh+vao+thu+muc+voi+ten:+bt1_3.jpg'">
+                    <div class="evidence-caption">Minh chứng: Cấu trúc thư mục, quy tắc đặt tên và quản lý tệp trên máy tính/Cloud</div>
+                </div>`
             },
             bt2: {
-                title: "Bài tập 2: Tìm kiếm & Đánh giá Thông tin",
-                content: `<h4>Chiến lược tìm kiếm & Phân tích CRAAP</h4><p>Áp dụng cú pháp tìm kiếm chuyên sâu: <code>"Object-Oriented Programming" AND "Java" filetype:pdf site:edu</code>. Đánh giá tính chính xác, thẩm quyền (Authority) và độ tin cậy của tài liệu khoa học so với blog cá nhân.</p>`
+                title: "Nhiệm vụ 2: Tìm kiếm & Đánh giá Thông tin (Mức 4)",
+                content: `
+                <h4>1. Phân tích Chiến lược Tìm kiếm Đa toán tử</h4>
+                <p><b>Chủ đề ứng dụng:</b> Phân tích tối ưu hóa xử lý đa luồng (Multithreading/Concurrency) trong Java.</p>
+                <p><b>Cú pháp linh hoạt:</b> <code>"Java Multithreading" AND "Concurrency" filetype:pdf site:edu.vn -wiki intitle:"Performance"</code>.</p>
+                <p>Sự kết hợp trên 4 toán tử giúp ép buộc Search Engine chỉ trả về các báo cáo khoa học từ các trường Đại học, loại bỏ ngay các thông tin Wiki đại chúng thiếu xác thực.</p>
+                <h4>2. Đánh giá chuyên sâu qua mô hình CRAAP</h4>
+                <table class="modal-table">
+                    <tr><th>Tiêu chí</th><th>Nguồn Học thuật (Tạp chí khoa học ĐH)</th><th>Nguồn Tham khảo (Blog cá nhân/Medium)</th></tr>
+                    <tr><td><b>C</b>urrency</td><td>Xuất bản 2024. Cập nhật cơ chế đa luồng mới nhất của Java 21.</td><td>Bài viết 2018. Đã lỗi thời với luồng logic hiện tại.</td></tr>
+                    <tr><td><b>A</b>uthority</td><td>Nghiên cứu sinh, chuyên gia được thẩm định minh bạch (Peer-reviewed).</td><td>Lập trình viên ẩn danh, chia sẻ quan điểm cá nhân.</td></tr>
+                    <tr><td><b>A</b>ccuracy</td><td>Dữ liệu Benchmark thực tế chạy trên Server, có nguồn trích dẫn rõ ràng.</td><td>Chỉ là lý thuyết suông, không có biểu đồ chứng minh hiệu năng.</td></tr>
+                </table>
+                `
             },
             bt3: {
-                title: "Bài tập 3: Kỹ thuật Prompt Engineering",
-                content: `<h4>Phương pháp luận đặt câu lệnh hệ thống</h4><p>Áp dụng cấu trúc Role (Giảng viên) - Context (Sinh viên năm nhất) - Task (Ví dụ và đoạn code <code>public class Main</code>) - Constraint (Không mô tả rườm rà). Giúp đầu ra của AI chính xác và sạch sẽ.</p>`
+                title: "Nhiệm vụ 3: Viết Prompt hiệu quả (Mức 4)",
+                content: `
+                <h4>1. So sánh sâu sắc và Tối ưu hóa Câu lệnh AI</h4>
+                <p>Để tận dụng tối đa AI trong việc gỡ rối (Debug) và học tập lập trình Java, cấu trúc lệnh cần tuân thủ chặt chẽ Role-Task-Context-Constraint. Đặc biệt, để phù hợp với quy chuẩn, Prompt được yêu cầu phải kiểm soát được định dạng output của AI.</p>
+                <table class="modal-table">
+                    <tr><th>Prompt Sơ cấp (Thiếu kiểm soát)</th><th>Prompt Nâng cao (Tối ưu cơ chế hoạt động của AI)</th></tr>
+                    <tr>
+                        <td>"Viết cho tôi một đoạn code Java về xử lý luồng (Multithread) nhé."</td>
+                        <td>"<b>[Role]</b> Đóng vai là Giảng viên Senior Java tại UET.<br><b>[Context]</b> Sinh viên năm nhất cần hiểu về Multithreading.<br><b>[Task]</b> Viết một chương trình ngắn minh họa luồng thực thi.<br><b>[Constraint] TỐI QUAN TRỌNG:</b> Lớp bao bọc bắt buộc phải đặt tên là <code>public class Main</code>. Đặc biệt, TRONG TRỌNG TÂM CODE KHÔNG ĐƯỢC CHÈN THÊM BẤT KỲ DÒNG COMMENT (// hay /**/) HOẶC TEXT DESCRIPTION NÀO RƯỜM RÀ BÊN NGOÀI. Hiển thị bảng chân lý nếu có dùng 'T' và 'F' thay cho số."</td>
+                    </tr>
+                </table>
+                <h4>2. Đánh giá cơ chế hoạt động của mô hình</h4>
+                <p>Nhờ cơ chế Attention, AI đã nắm bắt chính xác Constraint (ràng buộc không sinh văn bản rác) để trả về đúng khối code <code>public class Main</code> tinh gọn, giúp tôi copy & test trực tiếp trên IDE mà không mất thời gian xóa text thừa.</p>
+                `
             },
             bt4: {
-                title: "Bài tập 4: Hợp tác số & Quản lý Dự án",
-                content: `<h4>Thiết lập không gian làm việc số</h4><p>Sử dụng Trello để áp dụng quy trình làm việc Agile. Các thẻ nhiệm vụ được đính kèm link Google Docs trực tiếp để chỉnh sửa theo thời gian thực (Real-time collaboration).</p>`
+                title: "Nhiệm vụ 4: Hợp tác Trực tuyến Dự án Nhóm (Mức 4)",
+                content: `
+                <h4>1. Tích hợp tính năng Nâng cao Quản trị Dự án "KA Homes"</h4>
+                <p>Dự án quản lý căn hộ cho thuê "KA Homes" được số hóa toàn bộ quy trình làm việc nhóm thông qua mô hình Agile/Scrum. Không gian số được thiết lập liên kết chặt chẽ:</p>
+                <ul>
+                    <li><b>Trello (Kanban Board):</b> Chia cột Backlog, In Progress, Review, Done. Sử dụng Label màu sắc để đánh dấu độ ưu tiên.</li>
+                    <li><b>Tích hợp chéo (Cross-integration):</b> Mỗi thẻ Trello đều nhúng trực tiếp API/Link Google Docs chứa kịch bản tư vấn khách hàng hoặc hợp đồng thuê phòng.</li>
+                    <li><b>Google Workspace:</b> Sử dụng tính năng "Suggesting mode" (Chế độ đề xuất) trên Google Docs để team review chéo tài liệu mà không xóa nhầm dữ liệu gốc của nhau.</li>
+                </ul>
+                <div class="evidence-container">
+                    <img src="bt4_1.jpg" alt="Ảnh 1" class="evidence-img" onerror="this.src='https://placehold.co/800x400/1c2128/8b949e?text=Vui+long+luu+anh+vao+thu+muc+voi+ten:+bt4_1.jpg'">
+                    <img src="bt4_2.jpg" alt="Ảnh 2" class="evidence-img" onerror="this.src='https://placehold.co/800x400/1c2128/8b949e?text=Vui+long+luu+anh+vao+thu+muc+voi+ten:+bt4_2.jpg'">
+                    <div class="evidence-caption">Minh chứng: Bảng Kanban trên Trello và Lịch sử chỉnh sửa Google Docs</div>
+                </div>`
             },
             bt5: {
-                title: "Bài tập 5: Sử dụng AI Sáng tạo Nội dung",
-                content: `<h4>Quy trình ứng dụng Generative AI</h4><p>Dùng LLM phác thảo dàn ý kiến thức, tạo prompt mô tả hình ảnh cho Midjourney/DALL-E, và dùng Canva để dàn trang thành Infographic chuyên nghiệp.</p>`
+                title: "Nhiệm vụ 5: Sáng tạo Nội dung Số với AI (Mức 4)",
+                content: `
+                <h4>1. Thể hiện khả năng tận dụng đa công cụ AI</h4>
+                <p>Sản phẩm thiết kế: Infographic chuyên nghiệp tổng hợp "4 Nguyên lý Lập trình Hướng đối tượng (OOP) bằng Java". Quy trình khép kín tinh gọn:</p>
+                <ul>
+                    <li><b>LLM (ChatGPT/Gemini):</b> Đảm nhận vai trò Copywriter, prompt bóc tách kiến thức khô khan thành các Bullet point ngắn gọn dưới 20 từ.</li>
+                    <li><b>Generative Art (Midjourney/DALL-E):</b> Sinh tạo các bộ icon minh họa kỹ thuật (với prompt quy định thống nhất Style: Isometric, Blue & Pink Neon tint).</li>
+                    <li><b>Design (Canva):</b> Bố cục tỷ lệ vàng, chèn font chữ công nghệ, xuất bản file chất lượng cao.</li>
+                </ul>
+                <div class="evidence-container">
+                    <img src="bt5_1.jpg" alt="Ảnh 1" class="evidence-img" onerror="this.src='https://placehold.co/800x400/1c2128/8b949e?text=Vui+long+luu+anh+vao+thu+muc+voi+ten:+bt5_1.jpg'">
+                    <img src="bt5_2.jpg" alt="Ảnh 2" class="evidence-img" onerror="this.src='https://placehold.co/800x400/1c2128/8b949e?text=Vui+long+luu+anh+vao+thu+muc+voi+ten:+bt5_2.jpg'">
+                    <div class="evidence-caption">Minh chứng: Prompt thiết kế và Sản phẩm Infographic hoàn thiện</div>
+                </div>`
             },
             bt6: {
-                title: "Bài tập 6: Đạo đức & Trách nhiệm khi dùng AI",
-                content: `<h4>Bộ nguyên tắc 3 điểm</h4><ol><li><b>Minh bạch:</b> Chú thích rõ phần có AI hỗ trợ.</li><li><b>Kiểm chứng:</b> Không tin tưởng mù quáng vào kết quả thuật toán, luôn kiểm chứng bằng giáo trình.</li><li><b>Chủ động:</b> AI là trợ lý, không phải người giải hộ (What vs How).</li></ol>`
+                title: "Nhiệm vụ 6: Trách nhiệm & Đạo đức AI (Mức 4)",
+                content: `
+                <h4>1. Phân tích ranh giới và Tư duy Phản biện</h4>
+                <p>Sử dụng AI trong môi trường học thuật và luyện thi (như luyện IELTS mục tiêu Band 8.0 hay code Java) có lằn ranh rất mỏng manh giữa việc "Sử dụng đòn bẩy công nghệ" và "Gian lận/Đánh mất tư duy".</p>
+                <h4>2. Bộ Nguyên tắc Cá nhân</h4>
+                <ul>
+                    <li><b>Nguyên tắc Chủ động (Tự lực):</b> KHÔNG BẢO AI VIẾT HỘ bài luận hay tự động code toàn bộ đồ án. TÔI LÀ NGƯỜI LÀM. AI chỉ đóng vai trò là "Examiner" để chấm điểm, hoặc "Debugger" để dò tìm lỗi Runtime Error.</li>
+                    <li><b>Nguyên tắc Phản biện (Anti-Hallucination):</b> Mọi luồng logic, thuật toán AI đưa ra ĐỀU PHẢI được đối chiếu với Giáo trình. Coi AI là một người gợi ý, không phải chân lý.</li>
+                    <li><b>Nguyên tắc Minh bạch:</b> Trong các báo cáo bài tập lớn, sẵn sàng trích dẫn chú thích phần nội dung có sử dụng LLM để tối ưu.</li>
+                </ul>
+                <div class="evidence-container">
+                    <img src="bt6.jpg" alt="Ảnh 1" class="evidence-img" onerror="this.src='https://placehold.co/800x400/1c2128/8b949e?text=Vui+long+luu+anh+vao+thu+muc+voi+ten:+bt6.jpg'">
+                    <div class="evidence-caption">Minh chứng: Cam kết Liêm chính Học thuật khi ứng dụng AI</div>
+                </div>`
+            },
+            bt7: {
+                title: "Nhiệm vụ 7: AI trong Khoa học Tự nhiên & Kỹ thuật (Mức 4)",
+                content: `
+                <h4>1. Tích hợp AI vào chuyên ngành Công nghệ Thông tin</h4>
+                <p>Trong quá trình theo học ngành CN1, AI đóng vai trò như một Copilot đắc lực. Thay vì tự mò mẫm các Exception phức tạp trong lập trình hướng đối tượng hoặc giải bài tập Vật lý đại cương, em sử dụng AI để bóc tách luồng tư duy, phân tích nguyên lý vật lý (như moment quán tính, động học) và tối ưu hóa giải thuật thành O(n) thay vì O(n^2).</p>
+                <h4>2. Định hướng Phát triển và Tác động</h4>
+                <p>Sự bùng nổ của AI không thay thế được Kỹ sư phần mềm mà đặt ra yêu cầu phải nâng cấp tư duy Kiến trúc hệ thống. Việc nắm vững tư duy Toán logic (Calculus, Đại số tuyến tính, Toán rời rạc) sẽ là tấm khiên vững chắc để kiểm duyệt và điều khiển lại các kết quả do AI sinh ra, đảm bảo tính bảo mật và hiệu suất khi chạy các dự án thực tiễn.</p>
+                `
             }
         };
 
-        document.addEventListener('DOMContentLoaded', () => {
-            // 1. CHUYỂN TRANG
-            const navBtns = document.querySelectorAll('.nav-btn');
-            const pageSections = document.querySelectorAll('.page-section');
-
-            navBtns.forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    navBtns.forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-
-                    pageSections.forEach(section => section.classList.remove('active-section'));
-                    document.getElementById(btn.getAttribute('data-target')).classList.add('active-section');
-                });
+        // Logic điều hướng Tab và Menu
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active-section'));
+                document.getElementById(btn.getAttribute('data-target')).classList.add('active-section');
             });
+        });
 
-            // 2. BỘ LỌC TABS DỰ ÁN
-            const tabBtns = document.querySelectorAll('.tab-btn');
-            const projectCards = document.querySelectorAll('.project-card');
-
-            tabBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    tabBtns.forEach(b => b.classList.remove('active-filter'));
-                    btn.classList.add('active-filter');
-
-                    const targetFilter = btn.getAttribute('data-filter');
-                    projectCards.forEach(card => {
-                        if (targetFilter === 'all' || targetFilter === card.getAttribute('data-category')) {
-                            card.style.display = 'flex';
-                            setTimeout(() => { card.style.opacity = '1'; }, 50);
-                        } else {
-                            card.style.opacity = '0';
-                            setTimeout(() => { card.style.display = 'none'; }, 300);
-                        }
-                    });
-                });
-            });
-
-            // 3. XỬ LÝ MODAL POPUP
-            const modalOverlay = document.getElementById('assignment-modal');
-            const modalTitle = document.getElementById('modal-title');
-            const modalContent = document.getElementById('modal-content');
-
-            document.querySelectorAll('.btn-open-modal').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const data = assignmentData[btn.getAttribute('data-id')];
-                    if (data) {
-                        modalTitle.innerHTML = data.title;
-                        modalContent.innerHTML = data.content + '<br><div class="image-placeholder">[Vị trí chèn ảnh chụp màn hình minh chứng cho bài tập này]</div>';
-                        modalOverlay.classList.add('modal-active');
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active-filter'));
+                btn.classList.add('active-filter');
+                const filter = btn.getAttribute('data-filter');
+                document.querySelectorAll('.project-card').forEach(card => {
+                    if (filter === 'all' || filter === card.getAttribute('data-category')) {
+                        card.style.display = 'flex'; setTimeout(() => card.style.opacity = '1', 50);
+                    } else {
+                        card.style.opacity = '0'; setTimeout(() => card.style.display = 'none', 300);
                     }
                 });
             });
-
-            document.getElementById('close-modal').addEventListener('click', () => modalOverlay.classList.remove('modal-active'));
-            modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) modalOverlay.classList.remove('modal-active'); });
         });
+
+        // Xử lý Popup Modal
+        const modal = document.getElementById('assignment-modal');
+        document.querySelectorAll('.btn-open-modal').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const data = assignmentData[btn.getAttribute('data-id')];
+                document.getElementById('modal-title').innerHTML = data.title;
+                document.getElementById('modal-content').innerHTML = data.content;
+                modal.classList.add('modal-active');
+            });
+        });
+
+        document.getElementById('close-modal').addEventListener('click', () => modal.classList.remove('modal-active'));
+        modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('modal-active'); });
     </script>
 </body>
 </html>
